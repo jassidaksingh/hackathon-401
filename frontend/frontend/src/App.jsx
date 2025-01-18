@@ -7,6 +7,7 @@ import ResumeForm from './components/ResumeForm';
 import ResponseForm from './components/ResponseForm';
 // import About from './components/About';
 import NavBar from './components/NavBar'; // Import NavBar
+import About from './components/About';
 import './App.css';
 
 function App() {
@@ -24,7 +25,7 @@ function App() {
           <Route path="/responses/:applicationId" element={<Responses />} />
           <Route path="/responses/create" element={<ResponseForm />} />
           <Route path="/master-resume" element={<ResumeForm />} />
-          {/* <Route path="/about" element={<About />} /> */}
+          <Route path="/about" element={<About />} />
         </Routes>
       </main>
     </Router>
