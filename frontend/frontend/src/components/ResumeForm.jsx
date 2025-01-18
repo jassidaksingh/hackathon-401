@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import './ResumeForm.css';
 
 const ResumeForm = () => {
   const [formData, setFormData] = useState({
@@ -11,7 +12,6 @@ const ResumeForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Use FormData for file uploads
     const data = new FormData();
     data.append("name", formData.name);
     data.append("template_file", formData.template_file);
@@ -33,26 +33,30 @@ const ResumeForm = () => {
   };
 
   return (
-    <form className='container'onSubmit={handleSubmit}>
-      <label>
-        Resume Name:
-        <input
-          type="text"
-          value={formData.name}
-          onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-        />
-      </label>
-      <label>
-        Upload File:
-        <input
-          type="file"
-          onChange={(e) =>
-            setFormData({ ...formData, template_file: e.target.files[0] })
-          }
-        />
-      </label>
-      <button type="submit">Save</button>
-    </form>
+    <div className="resume-form-container">
+      <form className="resume-form" onSubmit={handleSubmit}>
+        <div className="form-group">
+          <label>Resume Name:</label>
+          <input
+            type="text"
+            value={formData.name}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label>Upload File:</label>
+          <input
+            type="file"
+            onChange={(e) =>
+              setFormData({ ...formData, template_file: e.target.files[0] })
+            }
+            required
+          />
+        </div>
+        <button className="submit-button" type="submit">Save</button>
+      </form>
+    </div>
   );
 };
 

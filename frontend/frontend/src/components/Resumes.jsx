@@ -28,7 +28,7 @@ const Resumes = () => {
           <a href={masterResume.template_file} target="_blank" rel="noopener noreferrer">
             View Master Resume
           </a>
-          <Link to={`/resumes/${masterResume.id}/edit`}>Edit</Link>
+          <Link to={`Http://localhost:8000/resumes/${masterResume.id}/edit`}>Edit</Link>
         </div>
       )}
 
