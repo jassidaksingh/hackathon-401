@@ -5,6 +5,10 @@ from django.utils.decorators import method_decorator
 from django.views import View
 import json
 from .models import Application, Resume, ResponseTracking
+from rest_framework.viewsets import ModelViewSet
+from .serializers import ResumeSerializer
+from  rest_framework  import  viewsets
+
 
 # Helper function to parse request body
 def parse_request_body(request):
@@ -60,38 +64,107 @@ class ApplicationDetailView(View):
         return JsonResponse({"message": "Application deleted successfully."})
 
 # Resumes Views
-@method_decorator(csrf_exempt, name='dispatch')
-class ResumesView(View):
+# @method_decorator(csrf_exempt, name='dispatch')
+# class ResumesView(View):
+#     def get(self, request):
+#         resumes = list(Resume.objects.values())
+#         return JsonResponse(resumes, safe=False)
+
+#     def post(self, request):
+#         # Access form data and file data
+#         name = request.POST.get('name')
+#         template_file = request.FILES.get('template_file')  # File from the frontend
+
+#         # Validate input
+#         if not name or not template_file:
+#             return JsonResponse({'error': 'Name and file are required.'}, status=400)
+
+#         # Save the resume to the database
+#         resume = Resume.objects.create(name=name, template_file=template_file)
+
+#         # Return success response
+#         return JsonResponse({'id': resume.id}, status=201)
+    
+# @method_decorator(csrf_exempt, name='dispatch')
+# class ResumeDetailView(View):
+#     def get(self, request, pk):
+#         resume = get_object_or_404(Resume, pk=pk)
+#         return JsonResponse({
+#             "id": resume.id,
+#             "name": resume.name,
+#             "template_file": resume.template_file.url,
+#         })
+
+#     def put(self, request, pk):
+#         resume = get_object_or_404(Resume, pk=pk)
+#         name = request.POST.get('name', resume.name)
+#         template_file = request.FILES.get('template_file', resume.template_file)
+
+#         # Update fields
+#         resume.name = name
+#         if template_file:
+#             resume.template_file = template_file
+#         resume.save()
+
+#         return JsonResponse({
+#             "id": resume.id,
+#             "name": resume.name,
+#             "template_file": resume.template_file.url,
+#         })
+    
+#     def delete(self, request, pk):
+#         resume = get_object_or_404(Resume, pk=pk)
+#         resume.delete()
+#         return JsonResponse({"message": "Resume deleted successfully."})
+
+
+
+@method_decorator(csrf_exempt, name="dispatch")
+class ResumeListView(View):
+    # GET: List all resumes
     def get(self, request):
-        resumes = list(Resume.objects.values())
-        return JsonResponse(resumes, safe=False)
+        resumes = Resume.objects.all().values("id", "name", "template_file", "created_at", "updated_at")
+        return JsonResponse(list(resumes), safe=False)
 
+    # POST: Create a new resume
     def post(self, request):
-        data = parse_request_body(request)
-        resume = Resume.objects.create(name=data.get("name"), template_file=data.get("template_file"))
-        return JsonResponse({"id": resume.id}, status=201)
+        data = request.POST
+        template_file = request.FILES.get("template_file")
+        resume = Resume.objects.create(name=data.get("name"), template_file=template_file)
+        return JsonResponse({"id": resume.id, "message": "Resume created successfully."}, status=201)
 
-@method_decorator(csrf_exempt, name='dispatch')
+@method_decorator(csrf_exempt, name="dispatch")
 class ResumeDetailView(View):
+    # GET: Retrieve a specific resume
     def get(self, request, pk):
         resume = get_object_or_404(Resume, pk=pk)
         return JsonResponse({
             "id": resume.id,
             "name": resume.name,
             "template_file": resume.template_file.url,
+            "created_at": resume.created_at,
+            "updated_at": resume.updated_at,
         })
 
+    # PUT: Update a specific resume
     def put(self, request, pk):
-        data = parse_request_body(request)
         resume = get_object_or_404(Resume, pk=pk)
+        data = parse_request_body(request)
         resume.name = data.get("name", resume.name)
+        if "template_file" in request.FILES:
+            resume.template_file = request.FILES["template_file"]
         resume.save()
         return JsonResponse({"message": "Resume updated successfully."})
 
+    # DELETE: Delete a specific resume
     def delete(self, request, pk):
         resume = get_object_or_404(Resume, pk=pk)
         resume.delete()
         return JsonResponse({"message": "Resume deleted successfully."})
+    
+
+
+
 
 # Responses Views
 @method_decorator(csrf_exempt, name='dispatch')
