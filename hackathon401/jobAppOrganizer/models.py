@@ -20,13 +20,14 @@ class Application(models.Model):
     
 
 class Resume(models.Model):
-    name=models.CharField(max_length=35)
-    template_file = models.FileField(upload_to='resumes/')
+    name=models.CharField(max_length=100)
+    template_file = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    is_master = models.BooleanField(default=False)
 
     def __str__(self):
-        return self.name
+        return f"{self.name} ({'Master' if self.is_master else 'Tailored'})"
     
 
 class ResponseTracking(models.Model):

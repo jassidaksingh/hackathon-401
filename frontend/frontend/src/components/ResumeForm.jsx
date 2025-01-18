@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 
 const ResumeForm = () => {
-  const [formData, setFormData] = useState({ name: '', template_file: null });
+  const [formData, setFormData] = useState({ name: '', template_file: null, is_master: false });
   const navigate = useNavigate();
   const { id } = useParams();
 
@@ -10,7 +10,7 @@ const ResumeForm = () => {
     if (id) {
       fetch(`http://localhost:8000/api/resumes/${id}/`)
         .then((res) => res.json())
-        .then((data) => setFormData({ name: data.name }));
+        .then((data) => setFormData({ name: data.name, template_file: null, is_master: data.is_master }));
     }
   }, [id]);
 
@@ -20,14 +20,16 @@ const ResumeForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     const formDataObj = new FormData();
     formDataObj.append('name', formData.name);
     if (formData.template_file) {
       formDataObj.append('template_file', formData.template_file);
     }
+    formDataObj.append('is_master', formData.is_master);
 
     const method = id ? 'PUT' : 'POST';
-    fetch(`http://localhost:8000/api/resumes/${id || ''}`, {
+    fetch(`http://localhost:8000/api/resumes/${id ? `${id}/` : ''}`, {
       method,
       body: formDataObj,
     }).then(() => navigate('/resumes'));
@@ -44,8 +46,21 @@ const ResumeForm = () => {
         />
       </label>
       <label>
-        Upload File:
-        <input type="file" onChange={handleFileChange} />
+        Template Content:
+        <input
+          type="file"
+          onChange={handleFileChange}
+          accept=".pdf,.doc,.docx"
+        />
+      </label>
+
+      <label>
+        Master Resume:
+        <input
+          type="checkbox"
+          checked={formData.is_master}
+          onChange={(e) => setFormData({ ...formData, is_master: e.target.checked })}
+        />
       </label>
       <button type="submit">Save</button>
     </form>

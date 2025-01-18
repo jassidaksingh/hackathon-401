@@ -21,6 +21,7 @@ function App() {
 
         <Route path="/responses/:applicationId" element={<Responses />} />
         <Route path="/responses/create" element={<ResponseForm />} />
+        <Route path="/master-resume" element={< ResumeForm />} />
       </Routes>
     </Router>
   );

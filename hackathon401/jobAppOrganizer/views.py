@@ -67,13 +67,34 @@ class ApplicationDetailView(View):
 @method_decorator(csrf_exempt, name='dispatch')
 class ResumesView(View):
     def get(self, request):
-        resumes = list(Resume.objects.values())
-        return JsonResponse(resumes, safe=False)
+        master_resume = Resume.objects.filter(is_master=True).first()
+        if not master_resume:
+            return JsonResponse({"error": "Master resume not found"}, status=404)
+        return JsonResponse(master_resume, safe=False)
 
     def post(self, request):
-        data = parse_request_body(request)
-        resume = Resume.objects.create(name=data.get("name"), template_file=data.get("template_file"))
-        return JsonResponse({"id": resume.id}, status=201)
+        try:
+            data = json.loads(request.body)
+            resume = Resume.objects.create(
+                name=data.get("name"),
+                template_file=data.get("template_file", ""),
+                is_master=data.get("is_master", False)
+            )
+
+            if resume.is_master:
+                Resume.objects.exclude(id=resume.id).update(is_master=False)
+
+            return JsonResponse({"id": resume.id, "message": "Resume created successfully"}, status=201)
+        except Exception as e:
+            return JsonResponse({"error": str(e)}, status=400)
+    
+    def put(self, request):
+        data = json.loads(request.body)
+        master_resume, _ = Resume.objects.get_or_create(is_master=True)
+        master_resume.name = data.get("name", master_resume.name)
+        master_resume.template_file = data.get("template_file", master_resume.template_file)
+        master_resume.save()
+        return JsonResponse({"message": "Master resume updated"})
 
 @method_decorator(csrf_exempt, name='dispatch')
 class ResumeDetailView(View):
@@ -86,10 +107,19 @@ class ResumeDetailView(View):
         })
 
     def put(self, request, pk):
-        data = parse_request_body(request)
+        data = json.loads(request.body)
         resume = get_object_or_404(Resume, pk=pk)
+
+        # Update resume fields
         resume.name = data.get("name", resume.name)
+        resume.template_file = data.get("template_file", resume.template_file)
+        resume.is_master = data.get("is_master", resume.is_master)
         resume.save()
+
+        # If marked as master, ensure no other resume is master
+        if resume.is_master:
+            Resume.objects.exclude(id=resume.id).update(is_master=False)
+
         return JsonResponse({"message": "Resume updated successfully."})
 
     def delete(self, request, pk):
