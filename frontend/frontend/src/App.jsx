@@ -5,6 +5,8 @@ import Responses from './components/Responses';
 import ApplicationForm from './components/ApplicationForm';
 import ResumeForm from './components/ResumeForm';
 import ResponseForm from './components/ResponseForm';
+import EditResume from './components/EditResume';
+
 
 function App() {
   return (
@@ -17,7 +19,7 @@ function App() {
 
         <Route path="/resumes" element={<Resumes />} />
         <Route path="/resumes/create" element={<ResumeForm />} />
-        <Route path="/resumes/:id/edit" element={<ResumeForm />} />
+        <Route path="/resumes/:id/edit" element={<EditResume />} />
 
         <Route path="/responses/:applicationId" element={<Responses />} />
         <Route path="/responses/create" element={<ResponseForm />} />

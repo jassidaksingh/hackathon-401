@@ -20,8 +20,8 @@ class Application(models.Model):
     
 
 class Resume(models.Model):
-    name=models.CharField(max_length=100)
-    template_file = models.TextField()
+    name=models.CharField(max_length=85)
+    template_file = models.FileField(upload_to='resumes/')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_master = models.BooleanField(default=False)
