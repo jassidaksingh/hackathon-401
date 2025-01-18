@@ -23,7 +23,7 @@ const ApplicationForm = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const method = id ? 'PUT' : 'POST';
-    fetch(`http://localhost:8000/api/applications/${id || ''}/`, {
+    fetch(`http://localhost:8000/api/applications/${id ? `${id}/` : ''}`, {
       method,
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(formData),
