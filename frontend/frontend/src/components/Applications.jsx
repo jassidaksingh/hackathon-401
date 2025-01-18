@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import './Applications.css';
 
 const Applications = () => {
   const [applications, setApplications] = useState([]);
@@ -11,13 +12,19 @@ const Applications = () => {
   }, []);
 
   return (
-    <div>
-      <h1>Job Applications</h1>
-      <Link to="/applications/create">Add New Application</Link>
-      <ul>
+    <div className="applications-container">
+      <div className="applications-header">
+        <h1>Job Applications</h1>
+        <Link to="/applications/create">
+          <button>Add New Application</button>
+        </Link>
+      </div>
+      <ul className="application-list">
         {applications.map((app) => (
-          <li key={app.id}>
-            {app.position} at {app.company_name} ({app.status})
+          <li key={app.id} className="application-item">
+            <span>
+              {app.position} at {app.company_name} ({app.status})
+            </span>
             <Link to={`/applications/${app.id}/edit`}>Edit</Link>
           </li>
         ))}

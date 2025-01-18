@@ -11,17 +11,22 @@ const Resumes = () => {
   }, []);
 
   return (
-    <div>
+    <div className="container">
       <h1>Resumes</h1>
-      <Link to="/resumes/create">Upload New Resume</Link>
+      <Link to="/resumes/create">
+        <button>Upload New Resume</button>
+      </Link>
       <ul>
         {resumes.map((resume) => (
           <li key={resume.id}>
-            {resume.name}
-            <a href={resume.template_file} target="_blank" rel="noopener noreferrer">
-              View
-            </a>
-            <Link to={`/resumes/${resume.id}/edit`}>Edit</Link>
+            <span>{resume.name}</span>
+            <div>
+              <a href={resume.template_file} target="_blank" rel="noopener noreferrer">
+                View
+              </a>{' '}
+              |{' '}
+              <Link to={`/resumes/${resume.id}/edit`}>Edit</Link>
+            </div>
           </li>
         ))}
       </ul>

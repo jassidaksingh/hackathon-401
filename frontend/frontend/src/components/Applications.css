@@ -1,0 +1,65 @@
+/* Applications.css */
+.applications-container {
+    padding: 2rem;
+    background: var(--background-color);
+    border-radius: 8px;
+    box-shadow: var(--card-shadow);
+  }
+  
+  .applications-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .applications-header h1 {
+    font-size: 1.8rem;
+    color: var(--text-color);
+  }
+  
+  .applications-header button {
+    background: var(--primary-color);
+    color: #fff;
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .applications-header button:hover {
+    background: var(--secondary-color);
+  }
+  
+  .application-list {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .application-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: var(--card-background);
+    margin-bottom: 0.5rem;
+    border-radius: 6px;
+    box-shadow: var(--card-shadow);
+    transition: transform 0.2s;
+  }
+  
+  .application-item:hover {
+    transform: scale(1.02);
+  }
+  
+  .application-item span {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  
+  .application-item a {
+    color: var(--primary-color);
+    text-decoration: none;
+  }
+  

@@ -1,0 +1,90 @@
+/* ApplicationForm.css */
+.application-form-container {
+  max-width: 800px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Inter', sans-serif;
+}
+
+.application-form-container h1 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: #333333;
+  text-align: center;
+}
+
+.application-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.application-form-grid.full-width {
+  grid-template-columns: 1fr;
+}
+
+.application-form-label {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #333333;
+  margin-bottom: 0.5rem;
+}
+
+.application-form-input {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+.application-form-input:focus {
+  border-color: #646cff;
+  outline: none;
+  background-color: #ffffff;
+}
+
+.application-form-textarea {
+  resize: vertical;
+  height: 120px;
+}
+
+.application-form-button {
+  grid-column: span 2;
+  background: #646cff;
+  color: #ffffff;
+  padding: 1rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.application-form-button:hover {
+  background: #535bf2;
+}
+
+.status-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.status-container label {
+  margin: 0;
+}
+
+.application-form-checkbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}

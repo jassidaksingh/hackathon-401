@@ -34,7 +34,7 @@ const ResumeForm = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form className='container'onSubmit={handleSubmit}>
       <label>
         Resume Name:
         <input
