@@ -149,8 +149,9 @@ class ResumeDetailView(View):
     # PUT: Update a specific resume
     def put(self, request, pk):
         resume = get_object_or_404(Resume, pk=pk)
-        data = parse_request_body(request)
-        resume.name = data.get("name", resume.name)
+        data = request.POST
+        if "name" in data:
+            resume.name = data["name"]
         if "template_file" in request.FILES:
             resume.template_file = request.FILES["template_file"]
         resume.save()

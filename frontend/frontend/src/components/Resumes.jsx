@@ -63,7 +63,11 @@ const Resumes = () => {
                 </a>
                 {' '}
               |{' '}
-              <Link to={`http://localhost:8000/media/resumes/${resume.id}/edit`}>Edit</Link>
+              {/* <Link to={`http://localhost:8000/media/resumes/${resume.id}/edit`}>Edit</Link> */}
+              <Link to={`/resumes/${resume.id}/edit`} className="edit-link">
+  Edit
+</Link>
+
               </div>
             </li>
           ))}
