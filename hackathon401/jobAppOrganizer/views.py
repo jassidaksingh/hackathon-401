@@ -14,7 +14,12 @@ def parse_request_body(request):
 @method_decorator(csrf_exempt, name='dispatch')  # Apply CSRF exemption to the entire class
 class ApplicationsView(View):
     def get(self, request):
-        applications = list(Application.objects.values())
+        status = request.GET.get('status')
+
+        if status:
+            applications = list(Application.objects.filter(status=status))
+        else:
+            applications = list(Application.objects.values())
         return JsonResponse(applications, safe=False)
 
     def post(self, request):
