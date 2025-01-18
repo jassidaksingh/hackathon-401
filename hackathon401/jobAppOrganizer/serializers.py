@@ -9,7 +9,7 @@ class JobApplicationSerializer(serializers.ModelSerializer):
 class ResumeSerializer(serializers.ModelSerializer):
     class Meta:
         model = Resume
-        fields = '__all__'
+        fields = ['id', 'name', 'template_file', 'created_at', 'updated_at']
 
 class ResponseTrackingSerializer(serializers.ModelSerializer):
     class Meta:
