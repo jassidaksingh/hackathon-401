@@ -24,10 +24,14 @@ class ApplicationsView(View):
 
     def post(self, request):
         data = parse_request_body(request)
+
+        date_applied = data.get("date_applied")
+        if not date_applied:
+            return JsonResponse({"error": "date applied is required"}, status=400)
         application = Application.objects.create(
             company_name=data.get("company_name"),
             position=data.get("position"),
-            date_applied=data.get("date_applied"),
+            date_applied=date_applied,
             status=data.get("status", "APPLIED"),
             notes=data.get("notes", "")
         )
