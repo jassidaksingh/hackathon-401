@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './Resumes.css';
@@ -46,13 +47,14 @@ const Resumes = () => {
         </div>
       )}
 
-      <h2>Other Resumes</h2>
-      <ul>
-        {otherResumes.map((resume) => (
-          <li key={resume.id}>
-            <span>{resume.name}</span>
-            <div>
-            <a
+      <div className="resume-section">
+        <h2>Other Resumes</h2>
+        <ul className="resume-list">
+          {otherResumes.map((resume) => (
+            <li key={resume.id} className="resume-item">
+              <span className="resume-name">{resume.name}</span>
+              <div className="resume-actions">
+              <a
                 href={`http://localhost:8000/media/${resume.template_file}`}
                 target="_blank"
                 rel="noopener noreferrer"
@@ -61,11 +63,16 @@ const Resumes = () => {
                 </a>
                 {' '}
               |{' '}
-              <Link to={`http://localhost:8000/media/resumes/${resume.id}/edit`}>Edit</Link>
-            </div>
-          </li>
-        ))}
-      </ul>
+              {/* <Link to={`http://localhost:8000/media/resumes/${resume.id}/edit`}>Edit</Link> */}
+              <Link to={`/resumes/${resume.id}/edit`} className="edit-link">
+  Edit
+</Link>
+
+              </div>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };
