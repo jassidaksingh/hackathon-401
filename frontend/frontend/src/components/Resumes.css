@@ -1,0 +1,125 @@
+.resumes-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    padding: 2rem;
+}
+
+.resumes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.upload-button {
+    background-color: #007bff;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.upload-button:hover {
+    background-color: #0056b3;
+}
+
+.resume-section {
+    background-color: #ffffff;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 2rem;
+}
+
+.resume-section h2 {
+    color: #333;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #f0f0f0;
+}
+
+.resume-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.resume-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+}
+
+.resume-item:last-child {
+    border-bottom: none;
+}
+
+.resume-name {
+    font-size: 1.1rem;
+    color: #444;
+}
+
+.resume-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.resume-actions a {
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: all 0.2s;
+}
+
+.view-link {
+    color: #28a745;
+    border: 1px solid #28a745;
+}
+
+.view-link:hover {
+    background-color: #28a745;
+    color: white;
+}
+
+.edit-link {
+    color: #007bff;
+    border: 1px solid #007bff;
+}
+
+.edit-link:hover {
+    background-color: #007bff;
+    color: white;
+}
+
+.master-resume {
+    background-color: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid #28a745;
+}
+
+.master-resume h2 {
+    color: #28a745;
+    margin-bottom: 1rem;
+}
+
+@media (max-width: 768px) {
+    .resumes-container {
+        padding: 1rem;
+        margin: 1rem;
+    }
+
+    .resume-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .resume-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+} 
