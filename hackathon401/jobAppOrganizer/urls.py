@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 app_name = "jobAppOrganizer"
 
@@ -11,3 +13,5 @@ urlpatterns = [
     path('responses/<int:application_id>/', views.ResponsesView.as_view(), name='list_responses'),
     path('responses/<int:pk>/', views.ResponseDetailView.as_view(), name='response_detail'),
 ]
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

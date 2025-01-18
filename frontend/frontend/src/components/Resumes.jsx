@@ -38,11 +38,16 @@ const Resumes = () => {
           <li key={resume.id}>
             <span>{resume.name}</span>
             <div>
-              <a href={resume.template_file} target="_blank" rel="noopener noreferrer">
-                View
-              </a>{' '}
+            <a
+                href={`http://localhost:8000/media/${resume.template_file}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                >
+                View Resume
+                </a>
+                {' '}
               |{' '}
-              <Link to={`/resumes/${resume.id}/edit`}>Edit</Link>
+              <Link to={`http://localhost:8000/media/resumes/${resume.id}/edit`}>Edit</Link>
             </div>
           </li>
         ))}
