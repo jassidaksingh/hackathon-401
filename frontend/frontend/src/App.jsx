@@ -5,26 +5,26 @@ import Responses from './components/Responses';
 import ApplicationForm from './components/ApplicationForm';
 import ResumeForm from './components/ResumeForm';
 import ResponseForm from './components/ResponseForm';
-// import EditResume from './components/EditResume';
-
+import NavBar from './components/NavBar'; // Import NavBar
+import './App.css';
 
 function App() {
   return (
     <Router>
-      <Routes>
-        <Route path="/" element={<Navigate to="/applications" />} />
-        <Route path="/applications" element={<Applications />} />
-        <Route path="/applications/create" element={<ApplicationForm />} />
-        <Route path="/applications/:id/edit" element={<ApplicationForm />} />
-
-        <Route path="/resumes" element={<Resumes />} />
-        <Route path="/resumes/create" element={<ResumeForm />} />
-        {/* <Route path="/resumes/:id/edit" element={<EditResume />} /> */}
-
-        <Route path="/responses/:applicationId" element={<Responses />} />
-        <Route path="/responses/create" element={<ResponseForm />} />
-        <Route path="/master-resume" element={< ResumeForm />} />
-      </Routes>
+      <NavBar />
+      <main className="main-content">
+        <Routes>
+          <Route path="/" element={<Navigate to="/applications" />} />
+          <Route path="/applications" element={<Applications />} />
+          <Route path="/applications/create" element={<ApplicationForm />} />
+          <Route path="/applications/:id/edit" element={<ApplicationForm />} />
+          <Route path="/resumes" element={<Resumes />} />
+          <Route path="/resumes/create" element={<ResumeForm />} />
+          <Route path="/responses/:applicationId" element={<Responses />} />
+          <Route path="/responses/create" element={<ResponseForm />} />
+          <Route path="/master-resume" element={<ResumeForm />} />
+        </Routes>
+      </main>
     </Router>
   );
 }

@@ -1,0 +1,21 @@
+/* App.css */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: var(--content-background-color); /* Set a clean background for the entire app */
+    color: #333333;
+  }
+  
+  #root {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .main-content {
+    flex-grow: 1;
+    padding: 2rem; /* Add padding to separate content from NavBar */
+    background-color: var(--content-background-color);
+  }
+  
