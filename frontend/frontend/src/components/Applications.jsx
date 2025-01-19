@@ -22,9 +22,8 @@ const Applications = () => {
       <ul className="application-list">
         {applications.map((app) => (
           <li key={app.id} className="application-item">
-            <span className="application-details">
-              {app.position} at <span className="company-name">{app.company_name}</span>
-              <span className="application-status">({app.status})</span>
+            <span>
+              {app.position} at {app.company_name} ({app.status})
             </span>
             <Link to={`/applications/${app.id}/edit`}>Edit</Link>
           </li>
