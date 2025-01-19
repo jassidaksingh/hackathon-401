@@ -58,16 +58,12 @@ const Resumes = () => {
                 href={`http://localhost:8000/media/${resume.template_file}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                >
+              >
                 View Resume
-                </a>
+              </a>
                 {' '}
               |{' '}
-              {/* <Link to={`http://localhost:8000/media/resumes/${resume.id}/edit`}>Edit</Link> */}
-              <Link to={`/resumes/${resume.id}/edit`} className="edit-link">
-  Edit
-</Link>
-
+              <Link to={`http://localhost:8000/media/resumes/${resume.id}/edit`}>Edit</Link>
               </div>
             </li>
           ))}

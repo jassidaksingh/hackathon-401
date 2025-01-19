@@ -80,8 +80,8 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'hackathon401.wsgi.application'
-MEDIA_URL = '/media/resumes/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/resumes')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 # Database
